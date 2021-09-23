@@ -11,6 +11,7 @@ Funcionalidade: Busca de Carros
 
 Onde todos os cenarios podem ser encontrados no seguinte caminho WebmotorsFront\features\funcionalidades_board.feature
 
+_________________________________________________________________________________________________________________________________________________________________________
 
 ### Testes de Front End
 
@@ -31,7 +32,7 @@ cucumber
 
 •	Acessar a pasta WebmotorsFront e ver o arquivo cucumber_web_report.html 
 
-
+__________________________________________________________________________________________________________________________________________________________________________
 
 ### Testes de API
 
