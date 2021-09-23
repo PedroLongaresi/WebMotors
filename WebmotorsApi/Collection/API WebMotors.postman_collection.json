@@ -1,0 +1,4237 @@
+{
+	"info": {
+		"_postman_id": "68b9c2f7-5aff-420d-a775-fb2e73ff5a93",
+		"name": "API WebMotors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/make",
+			"item": [
+				{
+					"name": "Get All industries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"jsonData\", pm.response.json);\r",
+									"const responseJson = pm.response.json();\r",
+									"const expectedResponse = pm.variables.get(\"expectedResponseFromApiMake\");\r",
+									"const expectedSchema = pm.variables.get(\"expectedSchema\");\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check Array Size', function (){\r",
+									"    pm.expect(responseJson.length).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Body Not Null\", function (){\r",
+									"    pm.expect(responseJson).not.to.eql(null);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check if objects are equal', function () {\r",
+									"    \r",
+									" pm.expect(expectedResponse).to.eql(responseJson);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Schema\", () =>\r",
+									"{\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Teste do response Body\", () =>\r",
+									"{\r",
+									"    pm.expect(responseJson).to.be.an(\"array\");\r",
+									"    pm.expect(responseJson[1].ID).to.be.a(\"number\");\r",
+									"    pm.expect(responseJson[1].Name).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Assegurar se a base se matem para futuros testes\r",
+									"pm.test(\"Verifica se o mock\", function () {\r",
+									"    pm.expect(responseJson[1].Name).to.eql(\"Honda\");\r",
+									"    pm.expect(responseJson[1].ID).to.eql(2);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const expectedResponse =\r",
+									"    [\r",
+									"        {\r",
+									"            \"ID\": 1,\r",
+									"            \"Name\": \"Chevrolet\"\r",
+									"        },\r",
+									"        {\r",
+									"            \"ID\": 2,\r",
+									"            \"Name\": \"Honda\"\r",
+									"        },\r",
+									"        {\r",
+									"            \"ID\": 3,\r",
+									"            \"Name\": \"Ford\"\r",
+									"        }\r",
+									"    ];\r",
+									"\r",
+									"const Schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"array\",\r",
+									"    \"default\": [],\r",
+									"    \"examples\": [\r",
+									"        [\r",
+									"            {\r",
+									"                \"ID\": 1,\r",
+									"                \"Name\": \"Chevrolet\"\r",
+									"            },\r",
+									"            {\r",
+									"                \"ID\": 2,\r",
+									"                \"Name\": \"Honda\"\r",
+									"            }\r",
+									"        ]\r",
+									"    ],\r",
+									"    \"uniqueItems\": false,\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"$id\": \"#/items\",\r",
+									"        \"anyOf\": [\r",
+									"            {\r",
+									"                \"$id\": \"#/items/anyOf/0\",\r",
+									"                \"type\": \"object\",\r",
+									"                \"default\": {},\r",
+									"                \"examples\": [\r",
+									"                    {\r",
+									"                        \"ID\": 1,\r",
+									"                        \"Name\": \"Chevrolet\"\r",
+									"                    }\r",
+									"                ],\r",
+									"                \"required\": [\r",
+									"                    \"ID\",\r",
+									"                    \"Name\"\r",
+									"                ],\r",
+									"                \"properties\": {\r",
+									"                    \"ID\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/ID\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            1\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Name\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Name\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"Chevrolet\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalProperties\": true\r",
+									"            }\r",
+									"        ]\r",
+									"    }\r",
+									"}\r",
+									"pm.variables.set(\"expectedResponseFromApiMake\", expectedResponse);\r",
+									"pm.variables.set(\"expectedSchema\", Schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/Make",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Make"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200- Success!",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://desafioonline.webmotors.com.br/api/OnlineChallenge/Make",
+									"protocol": "https",
+									"host": [
+										"desafioonline",
+										"webmotors",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"OnlineChallenge",
+										"Make"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[\r\n    {\r\n        \"ID\": 1,\r\n        \"Name\": \"Chevrolet\"\r\n    },\r\n    {\r\n        \"ID\": 2,\r\n        \"Name\": \"Honda\"\r\n    },\r\n    {\r\n        \"ID\": 3,\r\n        \"Name\": \"Ford\"\r\n    }\r\n]"
+						},
+						{
+							"name": "500 - Internal Server Erro",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://desafioonline.webmotors.com.br/api/OnlineChallenge/Make",
+									"protocol": "https",
+									"host": [
+										"desafioonline",
+										"webmotors",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"OnlineChallenge",
+										"Make"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "400 - Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "pdf"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://desafioonline.webmotors.com.br/api/OnlineChallenge/Make",
+									"protocol": "https",
+									"host": [
+										"desafioonline",
+										"webmotors",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"OnlineChallenge",
+										"Make"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=us-ascii"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 22 Sep 2021 06:21:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-HTTPAPI/2.0"
+								},
+								{
+									"key": "Content-Length",
+									"value": "311"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\n<HTML>\n    <HEAD>\n        <TITLE>Bad Request</TITLE>\n        <META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\">\n    </HEAD>\n    <BODY>\n        <h2>Bad Request</h2>\n        <hr>\n        <p>HTTP Error 400. The request is badly formed.</p>\n    </BODY>\n</HTML>"
+						},
+						{
+							"name": "404 - Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://desafioonline.webmotors.com.br/api/OnlineChallenge/Make",
+									"protocol": "https",
+									"host": [
+										"desafioonline",
+										"webmotors",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"OnlineChallenge",
+										"Make"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 22 Sep 2021 06:22:24 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "237"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Make'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "405 - Method Not Allowed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://desafioonline.webmotors.com.br/api/OnlineChallenge/Make",
+									"protocol": "https",
+									"host": [
+										"desafioonline",
+										"webmotors",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"OnlineChallenge",
+										"Make"
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Allow",
+									"value": "GET"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 22 Sep 2021 06:23:55 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The requested resource does not support http method 'POST'.\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "/Model",
+			"item": [
+				{
+					"name": "Get Model Without Params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status ok?\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Body Not Null\", function (){\r",
+									"    pm.expect(pm.response).not.to.eql(null);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/Model",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Model"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://desafioonline.webmotors.com.br/api/OnlineChallenge/Model?MakeID=ID_Marca",
+									"protocol": "https",
+									"host": [
+										"desafioonline",
+										"webmotors",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"OnlineChallenge",
+										"Model"
+									],
+									"query": [
+										{
+											"key": "MakeID",
+											"value": "ID_Marca"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:35:34 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "SERVER",
+									"value": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "402"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'MakeID' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Model] Model(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "405- Wrong Method",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Model?MakeID={{ID_Marca}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Model"
+									],
+									"query": [
+										{
+											"key": "MakeID",
+											"value": "{{ID_Marca}}"
+										}
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Allow",
+									"value": "GET"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:46:43 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "SERVER",
+									"value": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The requested resource does not support http method 'XXXXX'.\"\n}"
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Model",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Model"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:50:04 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "237"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Model'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Model With Wrong Params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status ok?\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Body Not Null\", function (){\r",
+									"    pm.expect(pm.response).not.to.eql(null);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/Model?MakeID=Wrong",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Model"
+							],
+							"query": [
+								{
+									"key": "MakeID",
+									"value": "Wrong"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://desafioonline.webmotors.com.br/api/OnlineChallenge/Model?MakeID=ID_Marca",
+									"protocol": "https",
+									"host": [
+										"desafioonline",
+										"webmotors",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"OnlineChallenge",
+										"Model"
+									],
+									"query": [
+										{
+											"key": "MakeID",
+											"value": "ID_Marca"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:35:34 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "SERVER",
+									"value": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "402"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'MakeID' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Model] Model(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "405- Wrong Method",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Model?MakeID={{ID_Marca}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Model"
+									],
+									"query": [
+										{
+											"key": "MakeID",
+											"value": "{{ID_Marca}}"
+										}
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Allow",
+									"value": "GET"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:46:43 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "SERVER",
+									"value": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The requested resource does not support http method 'XXXXX'.\"\n}"
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Model",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Model"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:50:04 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "237"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Model'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Model With Correct Params But wrong ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response Body Not Null\", function (){\r",
+									"    pm.expect(responseJson).to.eql([]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/Model?MakeID=99999",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Model"
+							],
+							"query": [
+								{
+									"key": "MakeID",
+									"value": "99999"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://desafioonline.webmotors.com.br/api/OnlineChallenge/Model?MakeID=ID_Marca",
+									"protocol": "https",
+									"host": [
+										"desafioonline",
+										"webmotors",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"OnlineChallenge",
+										"Model"
+									],
+									"query": [
+										{
+											"key": "MakeID",
+											"value": "ID_Marca"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:35:34 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "SERVER",
+									"value": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "402"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'MakeID' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Model] Model(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Model",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Model"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:50:04 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "237"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Model'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "405- Wrong Method",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Model?MakeID={{ID_Marca}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Model"
+									],
+									"query": [
+										{
+											"key": "MakeID",
+											"value": "{{ID_Marca}}"
+										}
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Allow",
+									"value": "GET"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:46:43 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "SERVER",
+									"value": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The requested resource does not support http method 'XXXXX'.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Model With Correct Params and Correct ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const expectedResponse =\r",
+									"[\r",
+									"    {\r",
+									"        \"MakeID\": 2,\r",
+									"        \"ID\": 4,\r",
+									"        \"Name\": \"City\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"MakeID\": 2,\r",
+									"        \"ID\": 5,\r",
+									"        \"Name\": \"CRV\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"MakeID\": 2,\r",
+									"        \"ID\": 6,\r",
+									"        \"Name\": \"Fit\"\r",
+									"    }\r",
+									"];\r",
+									"\r",
+									"const Schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"array\",\r",
+									"    \"default\": [],\r",
+									"    \"examples\": [\r",
+									"        [\r",
+									"            {\r",
+									"                \"MakeID\": 1,\r",
+									"                \"ID\": 1,\r",
+									"                \"Name\": \"Agile\"\r",
+									"            },\r",
+									"            {\r",
+									"                \"MakeID\": 1,\r",
+									"                \"ID\": 2,\r",
+									"                \"Name\": \"Astra\"\r",
+									"            }\r",
+									"        ]\r",
+									"    ],\r",
+									"    \"uniqueItems\": false,\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"$id\": \"#/items\",\r",
+									"        \"anyOf\": [\r",
+									"            {\r",
+									"                \"$id\": \"#/items/anyOf/0\",\r",
+									"                \"type\": \"object\",\r",
+									"                \"default\": {},\r",
+									"                \"examples\": [\r",
+									"                    {\r",
+									"                        \"MakeID\": 1,\r",
+									"                        \"ID\": 1,\r",
+									"                        \"Name\": \"Agile\"\r",
+									"                    }\r",
+									"                ],\r",
+									"                \"required\": [\r",
+									"                    \"MakeID\",\r",
+									"                    \"ID\",\r",
+									"                    \"Name\"\r",
+									"                ],\r",
+									"                \"properties\": {\r",
+									"                    \"MakeID\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/MakeID\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            1\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"ID\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/ID\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            1\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Name\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Name\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"Agile\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalProperties\": true\r",
+									"            }\r",
+									"        ]\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.variables.set(\"expectedResponse\", expectedResponse);\r",
+									"pm.variables.set(\"expectedSchema\", Schema);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"jsonData\", pm.response.json);\r",
+									"const responseJson = pm.response.json();\r",
+									"const expectedResponse = pm.variables.get(\"expectedResponse\");\r",
+									"const expectedSchema = pm.variables.get(\"expectedSchema\");\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () \r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Schema\", () =>\r",
+									"{\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+									"})\r",
+									"\r",
+									"pm.test('Check if objects are equal', function () \r",
+									"{\r",
+									" pm.expect(expectedResponse).to.eql(responseJson);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check Array Size', function ()\r",
+									"{\r",
+									"    pm.expect(responseJson.length).to.eql(3);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/Model?MakeID={{ID_Marca}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Model"
+							],
+							"query": [
+								{
+									"key": "MakeID",
+									"value": "{{ID_Marca}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://desafioonline.webmotors.com.br/api/OnlineChallenge/Model?MakeID=ID_Marca",
+									"protocol": "https",
+									"host": [
+										"desafioonline",
+										"webmotors",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"OnlineChallenge",
+										"Model"
+									],
+									"query": [
+										{
+											"key": "MakeID",
+											"value": "ID_Marca"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:35:34 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "SERVER",
+									"value": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "402"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'MakeID' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Model] Model(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Model",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Model"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:50:04 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "237"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Model'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "405- Wrong Method",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Model?MakeID={{ID_Marca}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Model"
+									],
+									"query": [
+										{
+											"key": "MakeID",
+											"value": "{{ID_Marca}}"
+										}
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Allow",
+									"value": "GET"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 02:46:43 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "SERVER",
+									"value": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The requested resource does not support http method 'XXXXX'.\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "/Version",
+			"item": [
+				{
+					"name": "Get Version Without Params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status ok?\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Body Not Null\", function (){\r",
+									"    pm.expect(pm.response).not.to.eql(null);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/Version",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Version"
+							],
+							"query": [
+								{
+									"key": "ModelID",
+									"value": "{{ModelID}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID=Wrong",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID",
+											"value": "Wrong"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:44:32 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "407"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'ModelID' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Version] Version(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404- Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID2={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID2",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:46:37 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID2=4'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "500 -  Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "Get Version With Wrong Params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status ok?\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Body Not Null\", function (){\r",
+									"    pm.expect(pm.response).not.to.eql(null);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/Version?ModelID=Wrong",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Version"
+							],
+							"query": [
+								{
+									"key": "ModelID",
+									"value": "Wrong"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID=Wrong",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID",
+											"value": "Wrong"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:44:32 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "407"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'ModelID' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Version] Version(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404- Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID2={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID2",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:46:37 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID2=4'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "500 -  Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "Get Version With Correct Params but wrong ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status ok?\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Body Not Null\", function (){\r",
+									"    pm.expect(pm.response).not.to.eql(null);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/Version?ModelID=Wrong",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Version"
+							],
+							"query": [
+								{
+									"key": "ModelID",
+									"value": "Wrong"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID=Wrong",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID",
+											"value": "Wrong"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:44:32 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "407"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'ModelID' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Version] Version(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404- Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID2={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID2",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:46:37 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID2=4'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "500 -  Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "Get Version With Correct Params and Correct ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const expectedResponse =\r",
+									"[\r",
+									"    {\r",
+									"        \"ModelID\": 4,\r",
+									"        \"ID\": 21,\r",
+									"        \"Name\": \"1.5 DX 16V FLEX 4P AUTOMÁTICO\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ModelID\": 4,\r",
+									"        \"ID\": 22,\r",
+									"        \"Name\": \"1.5 LX 16V FLEX 4P MANUAL\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ModelID\": 4,\r",
+									"        \"ID\": 23,\r",
+									"        \"Name\": \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ModelID\": 4,\r",
+									"        \"ID\": 24,\r",
+									"        \"Name\": \"1.8 16V EVO FLEX FREEDOM OPEN EDITION AUTOMÁTICO\"\r",
+									"    }\r",
+									"];\r",
+									"\r",
+									"const Schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"array\",\r",
+									"    \"default\": [],\r",
+									"    \"examples\": [\r",
+									"        [\r",
+									"            {\r",
+									"                \"ModelID\": 4,\r",
+									"                \"ID\": 21,\r",
+									"                \"Name\": \"1.5 DX 16V FLEX 4P AUTOMÁTICO\"\r",
+									"            },\r",
+									"            {\r",
+									"                \"ModelID\": 4,\r",
+									"                \"ID\": 22,\r",
+									"                \"Name\": \"1.5 LX 16V FLEX 4P MANUAL\"\r",
+									"            }\r",
+									"        ]\r",
+									"    ],\r",
+									"    \"uniqueItems\": false,\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"$id\": \"#/items\",\r",
+									"        \"anyOf\": [\r",
+									"            {\r",
+									"                \"$id\": \"#/items/anyOf/0\",\r",
+									"                \"type\": \"object\",\r",
+									"                \"default\": {},\r",
+									"                \"examples\": [\r",
+									"                    {\r",
+									"                        \"ModelID\": 4,\r",
+									"                        \"ID\": 21,\r",
+									"                        \"Name\": \"1.5 DX 16V FLEX 4P AUTOMÁTICO\"\r",
+									"                    }\r",
+									"                ],\r",
+									"                \"required\": [\r",
+									"                    \"ModelID\",\r",
+									"                    \"ID\",\r",
+									"                    \"Name\"\r",
+									"                ],\r",
+									"                \"properties\": {\r",
+									"                    \"ModelID\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/ModelID\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            4\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"ID\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/ID\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            21\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Name\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Name\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"1.5 DX 16V FLEX 4P AUTOMÁTICO\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalProperties\": true\r",
+									"            }\r",
+									"        ]\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.variables.set(\"expectedResponse\", expectedResponse);\r",
+									"pm.variables.set(\"expectedSchema\", Schema);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"jsonData\", pm.response.json);\r",
+									"const responseJson = pm.response.json();\r",
+									"const expectedResponse = pm.variables.get(\"expectedResponse\");\r",
+									"const expectedSchema = pm.variables.get(\"expectedSchema\");\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () \r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Schema\", () =>\r",
+									"{\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/Version?ModelID={{ModelID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Version"
+							],
+							"query": [
+								{
+									"key": "ModelID",
+									"value": "{{ModelID}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID=Wrong",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID",
+											"value": "Wrong"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:44:32 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "407"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'ModelID' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Version] Version(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404- Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID2={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID2",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:46:37 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID2=4'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "500 -  Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Version?ModelID={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Version"
+									],
+									"query": [
+										{
+											"key": "ModelID",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/Vehicles",
+			"item": [
+				{
+					"name": "Get List of Vehicles without Params",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const expectedResponse = [];\r",
+									"\r",
+									"const Schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"array\",\r",
+									"    \"default\": [],\r",
+									"    \"examples\": [\r",
+									"        [\r",
+									"            {\r",
+									"                \"ID\": 1,\r",
+									"                \"Make\": \"Honda\",\r",
+									"                \"Model\": \"City\",\r",
+									"                \"Version\": \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\",\r",
+									"                \"Image\": \"http://desafioonline.webmotors.com.br/content/img/01.jpg\",\r",
+									"                \"KM\": 0,\r",
+									"                \"Price\": \"59000,00\",\r",
+									"                \"YearModel\": 2018,\r",
+									"                \"YearFab\": 2017,\r",
+									"                \"Color\": \"Azul\"\r",
+									"            },\r",
+									"            {\r",
+									"                \"ID\": 2,\r",
+									"                \"Make\": \"Mitsubishi\",\r",
+									"                \"Model\": \"Lancer\",\r",
+									"                \"Version\": \"2.0 EVO 4P AUTOMÁTICO\",\r",
+									"                \"Image\": \"http://desafioonline.webmotors.com.br/content/img/02.jpg\",\r",
+									"                \"KM\": 47500,\r",
+									"                \"Price\": \"49000,00\",\r",
+									"                \"YearModel\": 2012,\r",
+									"                \"YearFab\": 2012,\r",
+									"                \"Color\": \"Branco\"\r",
+									"            }\r",
+									"        ]\r",
+									"    ],\r",
+									"    \"uniqueItems\": false,\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"$id\": \"#/items\",\r",
+									"        \"anyOf\": [\r",
+									"            {\r",
+									"                \"$id\": \"#/items/anyOf/0\",\r",
+									"                \"type\": \"object\",\r",
+									"                \"default\": {},\r",
+									"                \"examples\": [\r",
+									"                    {\r",
+									"                        \"ID\": 1,\r",
+									"                        \"Make\": \"Honda\",\r",
+									"                        \"Model\": \"City\",\r",
+									"                        \"Version\": \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\",\r",
+									"                        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/01.jpg\",\r",
+									"                        \"KM\": 0,\r",
+									"                        \"Price\": \"59000,00\",\r",
+									"                        \"YearModel\": 2018,\r",
+									"                        \"YearFab\": 2017,\r",
+									"                        \"Color\": \"Azul\"\r",
+									"                    }\r",
+									"                ],\r",
+									"                \"required\": [],\r",
+									"                \"properties\": {\r",
+									"                    \"ID\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/ID\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            1\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Make\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Make\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"Honda\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Model\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Model\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"City\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Version\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Version\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Image\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Image\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"http://desafioonline.webmotors.com.br/content/img/01.jpg\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"KM\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/KM\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            0\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Price\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Price\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"59000,00\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"YearModel\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/YearModel\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            2018\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"YearFab\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/YearFab\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            2017\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Color\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Color\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"Azul\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalProperties\": true\r",
+									"            }\r",
+									"        ]\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.variables.set('randomNumber', Math.floor(Math.random() * 3));\r",
+									"pm.variables.set(\"expectedResponse\", expectedResponse);\r",
+									"pm.variables.set(\"expectedSchema\", Schema);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status ok?\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Body Not Null\", function (){\r",
+									"    pm.expect(pm.response).not.to.eql(null);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Vehicles",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Vehicles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Page=Wrong",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "Wrong"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:44:32 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "407"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Vehicle] Vehicle(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404- Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Pagee={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Pagee",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:46:37 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID2=4'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "500 -  Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Page={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "Get List of Vehicles with wrong params",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const expectedResponse = [];\r",
+									"\r",
+									"const Schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"array\",\r",
+									"    \"default\": [],\r",
+									"    \"examples\": [\r",
+									"        [\r",
+									"            {\r",
+									"                \"ID\": 1,\r",
+									"                \"Make\": \"Honda\",\r",
+									"                \"Model\": \"City\",\r",
+									"                \"Version\": \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\",\r",
+									"                \"Image\": \"http://desafioonline.webmotors.com.br/content/img/01.jpg\",\r",
+									"                \"KM\": 0,\r",
+									"                \"Price\": \"59000,00\",\r",
+									"                \"YearModel\": 2018,\r",
+									"                \"YearFab\": 2017,\r",
+									"                \"Color\": \"Azul\"\r",
+									"            },\r",
+									"            {\r",
+									"                \"ID\": 2,\r",
+									"                \"Make\": \"Mitsubishi\",\r",
+									"                \"Model\": \"Lancer\",\r",
+									"                \"Version\": \"2.0 EVO 4P AUTOMÁTICO\",\r",
+									"                \"Image\": \"http://desafioonline.webmotors.com.br/content/img/02.jpg\",\r",
+									"                \"KM\": 47500,\r",
+									"                \"Price\": \"49000,00\",\r",
+									"                \"YearModel\": 2012,\r",
+									"                \"YearFab\": 2012,\r",
+									"                \"Color\": \"Branco\"\r",
+									"            }\r",
+									"        ]\r",
+									"    ],\r",
+									"    \"uniqueItems\": false,\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"$id\": \"#/items\",\r",
+									"        \"anyOf\": [\r",
+									"            {\r",
+									"                \"$id\": \"#/items/anyOf/0\",\r",
+									"                \"type\": \"object\",\r",
+									"                \"default\": {},\r",
+									"                \"examples\": [\r",
+									"                    {\r",
+									"                        \"ID\": 1,\r",
+									"                        \"Make\": \"Honda\",\r",
+									"                        \"Model\": \"City\",\r",
+									"                        \"Version\": \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\",\r",
+									"                        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/01.jpg\",\r",
+									"                        \"KM\": 0,\r",
+									"                        \"Price\": \"59000,00\",\r",
+									"                        \"YearModel\": 2018,\r",
+									"                        \"YearFab\": 2017,\r",
+									"                        \"Color\": \"Azul\"\r",
+									"                    }\r",
+									"                ],\r",
+									"                \"required\": [],\r",
+									"                \"properties\": {\r",
+									"                    \"ID\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/ID\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            1\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Make\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Make\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"Honda\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Model\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Model\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"City\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Version\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Version\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Image\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Image\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"http://desafioonline.webmotors.com.br/content/img/01.jpg\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"KM\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/KM\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            0\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Price\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Price\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"59000,00\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"YearModel\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/YearModel\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            2018\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"YearFab\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/YearFab\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            2017\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Color\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Color\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"Azul\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalProperties\": true\r",
+									"            }\r",
+									"        ]\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.variables.set('randomNumber', Math.floor(Math.random() * 3));\r",
+									"pm.variables.set(\"expectedResponse\", expectedResponse);\r",
+									"pm.variables.set(\"expectedSchema\", Schema);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status ok?\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Body Not Null\", function (){\r",
+									"    pm.expect(pm.response).not.to.eql(null);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Vehicles?Page=teste",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Vehicles"
+							],
+							"query": [
+								{
+									"key": "Page",
+									"value": "teste"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Page=Wrong",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "Wrong"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:44:32 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "407"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'ModelID' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Version] Version(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404- Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Pagee={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Pagee",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:46:37 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID2=4'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "500 -  Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Page={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "Get Model With Correct Params and Correct ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const expectedResponse =\r",
+									"[\r",
+									"    {\r",
+									"        \"ID\": 1,\r",
+									"        \"Make\": \"Honda\",\r",
+									"        \"Model\": \"City\",\r",
+									"        \"Version\": \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/01.jpg\",\r",
+									"        \"KM\": 0,\r",
+									"        \"Price\": \"59000,00\",\r",
+									"        \"YearModel\": 2018,\r",
+									"        \"YearFab\": 2017,\r",
+									"        \"Color\": \"Azul\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ID\": 2,\r",
+									"        \"Make\": \"Mitsubishi\",\r",
+									"        \"Model\": \"Lancer\",\r",
+									"        \"Version\": \"2.0 EVO 4P AUTOMÁTICO\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/02.jpg\",\r",
+									"        \"KM\": 47500,\r",
+									"        \"Price\": \"49000,00\",\r",
+									"        \"YearModel\": 2012,\r",
+									"        \"YearFab\": 2012,\r",
+									"        \"Color\": \"Branco\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ID\": 3,\r",
+									"        \"Make\": \"Honda\",\r",
+									"        \"Model\": \"Fit\",\r",
+									"        \"Version\": \"1.4 LXL 16V FLEX 4P AUTOMÁTICO\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/03.jpg\",\r",
+									"        \"KM\": 0,\r",
+									"        \"Price\": \"78000,00\",\r",
+									"        \"YearModel\": 2018,\r",
+									"        \"YearFab\": 2018,\r",
+									"        \"Color\": \"Preto\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ID\": 4,\r",
+									"        \"Make\": \"Mitsubishi\",\r",
+									"        \"Model\": \"Lancer\",\r",
+									"        \"Version\": \"2.0 EVO 4P AUTOMÁTICO\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/04.jpg\",\r",
+									"        \"KM\": 12900,\r",
+									"        \"Price\": \"59000,00\",\r",
+									"        \"YearModel\": 2016,\r",
+									"        \"YearFab\": 2015,\r",
+									"        \"Color\": \"Vermelho\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ID\": 5,\r",
+									"        \"Make\": \"Honda\",\r",
+									"        \"Model\": \"Fit\",\r",
+									"        \"Version\": \"1.4 LXL 16V FLEX 4P AUTOMÁTICO\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/05.jpg\",\r",
+									"        \"KM\": 12000,\r",
+									"        \"Price\": \"55000,00\",\r",
+									"        \"YearModel\": 2016,\r",
+									"        \"YearFab\": 2016,\r",
+									"        \"Color\": \"Azul\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ID\": 6,\r",
+									"        \"Make\": \"Chevrolet\",\r",
+									"        \"Model\": \"Agile\",\r",
+									"        \"Version\": \"1.4 MPFI EFFECT 8V FLEX 4P AUTOMATIZADO\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/06.jpg\",\r",
+									"        \"KM\": 12000,\r",
+									"        \"Price\": \"37000,00\",\r",
+									"        \"YearModel\": 2014,\r",
+									"        \"YearFab\": 2013,\r",
+									"        \"Color\": \"Vermelho\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ID\": 7,\r",
+									"        \"Make\": \"Chevrolet\",\r",
+									"        \"Model\": \"Agile\",\r",
+									"        \"Version\": \"1.4 MPFI EFFECT 8V FLEX 4P AUTOMATIZADO\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/07.jpg\",\r",
+									"        \"KM\": 0,\r",
+									"        \"Price\": \"45000,00\",\r",
+									"        \"YearModel\": 2018,\r",
+									"        \"YearFab\": 2017,\r",
+									"        \"Color\": \"Cinza\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ID\": 8,\r",
+									"        \"Make\": \"Ford\",\r",
+									"        \"Model\": \"Ecosport\",\r",
+									"        \"Version\": \"1.6 FREESTYLE 16V FLEX 4P MANUAL\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/08.jpg\",\r",
+									"        \"KM\": 93000,\r",
+									"        \"Price\": \"45000,00\",\r",
+									"        \"YearModel\": 2013,\r",
+									"        \"YearFab\": 2012,\r",
+									"        \"Color\": \"Branca\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ID\": 9,\r",
+									"        \"Make\": \"Chevrolet\",\r",
+									"        \"Model\": \"Agile\",\r",
+									"        \"Version\": \"1.4 MPFI EFFECT 8V FLEX 4P AUTOMATIZADO\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/06.jpg\",\r",
+									"        \"KM\": 12000,\r",
+									"        \"Price\": \"37000,00\",\r",
+									"        \"YearModel\": 2014,\r",
+									"        \"YearFab\": 2013,\r",
+									"        \"Color\": \"Vermelho\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"ID\": 10,\r",
+									"        \"Make\": \"Honda\",\r",
+									"        \"Model\": \"Fit\",\r",
+									"        \"Version\": \"1.4 LXL 16V FLEX 4P AUTOMÁTICO\",\r",
+									"        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/05.jpg\",\r",
+									"        \"KM\": 12000,\r",
+									"        \"Price\": \"55000,00\",\r",
+									"        \"YearModel\": 2016,\r",
+									"        \"YearFab\": 2016,\r",
+									"        \"Color\": \"Azul\"\r",
+									"    }\r",
+									"];\r",
+									"\r",
+									"const Schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"array\",\r",
+									"    \"default\": [],\r",
+									"    \"examples\": [\r",
+									"        [\r",
+									"            {\r",
+									"                \"ID\": 1,\r",
+									"                \"Make\": \"Honda\",\r",
+									"                \"Model\": \"City\",\r",
+									"                \"Version\": \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\",\r",
+									"                \"Image\": \"http://desafioonline.webmotors.com.br/content/img/01.jpg\",\r",
+									"                \"KM\": 0,\r",
+									"                \"Price\": \"59000,00\",\r",
+									"                \"YearModel\": 2018,\r",
+									"                \"YearFab\": 2017,\r",
+									"                \"Color\": \"Azul\"\r",
+									"            },\r",
+									"            {\r",
+									"                \"ID\": 2,\r",
+									"                \"Make\": \"Mitsubishi\",\r",
+									"                \"Model\": \"Lancer\",\r",
+									"                \"Version\": \"2.0 EVO 4P AUTOMÁTICO\",\r",
+									"                \"Image\": \"http://desafioonline.webmotors.com.br/content/img/02.jpg\",\r",
+									"                \"KM\": 47500,\r",
+									"                \"Price\": \"49000,00\",\r",
+									"                \"YearModel\": 2012,\r",
+									"                \"YearFab\": 2012,\r",
+									"                \"Color\": \"Branco\"\r",
+									"            }\r",
+									"        ]\r",
+									"    ],\r",
+									"    \"uniqueItems\": false,\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"$id\": \"#/items\",\r",
+									"        \"anyOf\": [\r",
+									"            {\r",
+									"                \"$id\": \"#/items/anyOf/0\",\r",
+									"                \"type\": \"object\",\r",
+									"                \"default\": {},\r",
+									"                \"examples\": [\r",
+									"                    {\r",
+									"                        \"ID\": 1,\r",
+									"                        \"Make\": \"Honda\",\r",
+									"                        \"Model\": \"City\",\r",
+									"                        \"Version\": \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\",\r",
+									"                        \"Image\": \"http://desafioonline.webmotors.com.br/content/img/01.jpg\",\r",
+									"                        \"KM\": 0,\r",
+									"                        \"Price\": \"59000,00\",\r",
+									"                        \"YearModel\": 2018,\r",
+									"                        \"YearFab\": 2017,\r",
+									"                        \"Color\": \"Azul\"\r",
+									"                    }\r",
+									"                ],\r",
+									"                \"required\": [\r",
+									"                    \"ID\",\r",
+									"                    \"Make\",\r",
+									"                    \"Model\",\r",
+									"                    \"Version\",\r",
+									"                    \"Image\",\r",
+									"                    \"KM\",\r",
+									"                    \"Price\",\r",
+									"                    \"YearModel\",\r",
+									"                    \"YearFab\",\r",
+									"                    \"Color\"\r",
+									"                ],\r",
+									"                \"properties\": {\r",
+									"                    \"ID\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/ID\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            1\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Make\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Make\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"Honda\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Model\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Model\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"City\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Version\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Version\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"2.0 EXL 4X4 16V GASOLINA 4P AUTOMÁTICO\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Image\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Image\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"http://desafioonline.webmotors.com.br/content/img/01.jpg\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"KM\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/KM\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            0\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Price\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Price\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"59000,00\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"YearModel\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/YearModel\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            2018\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"YearFab\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/YearFab\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            2017\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"Color\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/Color\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"Azul\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalProperties\": true\r",
+									"            }\r",
+									"        ]\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.variables.set('randomNumber', Math.floor(Math.random() * 3));\r",
+									"pm.variables.set(\"expectedResponse\", expectedResponse);\r",
+									"pm.variables.set(\"expectedSchema\", Schema);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"jsonData\", pm.response.json);\r",
+									"const responseJson = pm.response.json();\r",
+									"const expectedResponse = pm.variables.get(\"expectedResponse\");\r",
+									"const expectedSchema = pm.variables.get(\"expectedSchema\");\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () \r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Schema\", () =>\r",
+									"{\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+									"})\r",
+									"\r",
+									"pm.test('Check if objects are equal', function () \r",
+									"{\r",
+									" pm.expect(expectedResponse).to.eql(responseJson);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check Array Size', function ()\r",
+									"{\r",
+									"    pm.expect(responseJson.length).to.eql(10);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Vehicles?Page=1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Vehicles"
+							],
+							"query": [
+								{
+									"key": "Page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Page=Wrong",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "Wrong"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:44:32 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "407"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Vehicle] Vehicle(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404- Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Pagee={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Pagee",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:46:37 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID2=4'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "500 -  Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Page={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "Get Model With Correct Params and a High ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const expectedResponse = [];\r",
+									"\r",
+									"pm.variables.set(\"random_number\", _.random(100, 5000))\r",
+									"pm.variables.set(\"expectedResponse\", expectedResponse);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"jsonData\", pm.response.json);\r",
+									"const responseJson = pm.response.json();\r",
+									"const expectedResponse = pm.variables.get(\"expectedResponse\");\r",
+									"const expectedSchema = pm.variables.get(\"expectedSchema\");\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () \r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test('Check if objects are equal []', function () \r",
+									"{\r",
+									" pm.expect(expectedResponse).to.eql(responseJson);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check Array Size is 0', function ()\r",
+									"{\r",
+									"    pm.expect(responseJson.length).to.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Vehicles?Page={{random_number}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Vehicles"
+							],
+							"query": [
+								{
+									"key": "Page",
+									"value": "{{random_number}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400- Bad Request (Invalid Value for MakeID)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Page=Wrong",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "Wrong"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:44:32 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "407"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"The request is invalid.\",\n    \"MessageDetail\": \"The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Collections.Generic.List`1[Swagger.Models.Vehicle] Vehicle(Int32)' in 'Swagger.Controllers.OnlineChallengeController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.\"\n}"
+						},
+						{
+							"name": "404- Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Pagee={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Pagee",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Sep 2021 03:46:37 GMT"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"No HTTP resource was found that matches the request URI 'https://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID2=4'.\",\n    \"MessageDetail\": \"No action was found on the controller 'OnlineChallenge' that matches the request.\"\n}"
+						},
+						{
+							"name": "500 -  Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/Vehicles?Page={{ModelID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"Vehicles"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "{{ModelID}}"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "jsonData",
+			"value": ""
+		}
+	]
+}

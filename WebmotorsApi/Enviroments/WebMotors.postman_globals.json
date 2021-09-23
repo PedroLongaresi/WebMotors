@@ -1,0 +1,29 @@
+{
+	"id": "109ad9ab-a02b-4c47-85ea-5fd74d0cfc86",
+	"values": [
+		{
+			"key": "Marca",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ID_Marca",
+			"value": "2",
+			"enabled": true
+		},
+		{
+			"key": "baseURL",
+			"value": "https://desafioonline.webmotors.com.br/api/OnlineChallenge",
+			"enabled": true
+		},
+		{
+			"key": "ModelID",
+			"value": "4",
+			"enabled": true
+		}
+	],
+	"name": "WebMotors Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2021-09-23T13:29:37.531Z",
+	"_postman_exported_using": "Postman/8.12.2"
+}

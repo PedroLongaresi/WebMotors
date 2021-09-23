@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Cucumber</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20class%3D%22ml-3%20ml-md-0%22%20viewBox%3D%220%200%2040.59%2046.31%22%20width%3D%2240.59%22%20height%3D%2246.31%22%3E%0A%20%20%20%20%3Cg%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20fill%3D%22%2323d96c%22%20fill-rule%3D%22evenodd%22%20d%3D%22M30.283%203.645q-.528-.317-1.08-.593a16.164%2016.164%200%2000-1.154-.518c-.124-.052-.247-.1-.372-.149-.343-.127-.689-.268-1.042-.371a19.427%2019.427%200%2010-9.792%2037.51v5.56c11.676-1.753%2022.016-10.979%2022.787-23.093.459-7.289-3.193-14.73-9.347-18.346z%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20fill%3D%22%23173647%22%20d%3D%22M15.787%2046.307v-5.935A20.472%2020.472%200%201126.959%201.015c.274.08.557.187.832.291l.248.093c.165.064.291.113.417.167.348.137.739.313%201.208.543q.589.295%201.153.633c6.393%203.756%2010.354%2011.518%209.857%2019.316-.763%2012-10.722%2022.122-23.679%2024.067zm4.8-44.214h-.026a18.366%2018.366%200%2000-3.524%2036.408l.85.165v5.18c11.392-2.224%2020.009-11.272%2020.686-21.922.448-7.033-3.1-14.018-8.83-17.383l-.008-.005A14.691%2014.691%200%200027.654%203.5a5.74%205.74%200%2000-.344-.138l-.27-.1a9.49%209.49%200%2000-.708-.249%2018.425%2018.425%200%2000-5.743-.92z%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20fill%3D%22%23173647%22%20fill-rule%3D%22evenodd%22%20d%3D%22M16.666%2010.58a1.8%201.8%200%20011.583.608%204.184%204.184%200%2001.728%201.107c.645%201.422%201.027%203.461.23%204.605a6.334%206.334%200%2001-3.981-3.087%203.236%203.236%200%2001-.347-1.339%201.957%201.957%200%20011.787-1.894zm-5.683%208.025a7.742%207.742%200%20001.218.737%205.789%205.789%200%20004.883-.138%206.116%206.116%200%2000-3.345-3.45%203.664%203.664%200%2000-1.442-.321%201.884%201.884%200%2000-.319%200%201.766%201.766%200%2000-.995%203.172zm6.1%203.433c-.777-.518-2.379-.309-3.312-.292a4.416%204.416%200%2000-1.666.352%203.5%203.5%200%2000-1.218.738%201.817%201.817%200%20001.409%203.171%203.3%203.3%200%20001.442-.321c1.436-.62%203.141-2.32%203.346-3.648zm2.61%202a6.556%206.556%200%2000-3.724%203.506%203.091%203.091%200%2000-.321%201.314%201.907%201.907%200%20003.3%201.346%207.422%207.422%200%2000.7-1.218c.621-1.333.866-3.72.046-4.948zm2.557-7.167a5.941%205.941%200%20003.7-3.167%203.243%203.243%200%2000.319-1.346%201.915%201.915%200%2000-1.794-1.954%201.832%201.832%200%2000-1.6.641%207.382%207.382%200%2000-.705%201.218c-.62%201.434-.842%203.48.081%204.603zm4.208%2012.115a3.244%203.244%200%2000-.321-1.345%205.869%205.869%200%2000-3.554-3.269%205.386%205.386%200%2000-.226%204.711%204.147%204.147%200%2000.7%201.121c1.133%201.23%203.505.32%203.402-1.218zm4.2-6.28a7.466%207.466%200%2000-1.217-.7%204.425%204.425%200%2000-1.666-.352%206.4%206.4%200%2000-3.188.555%205.959%205.959%200%20003.316%203.386%203.672%203.672%200%20001.442.32%201.8%201.8%200%20001.31-3.209z%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E">
+	<style>
+
+.cucumber-react .cucumber-status--passed {
+  color: #2CB14A;
+}
+.cucumber-react .cucumber-status--skipped {
+  color: #00A0CC;
+}
+.cucumber-react .cucumber-status--pending {
+  color: #FFAD33;
+}
+.cucumber-react .cucumber-status--undefined {
+  color: #FFAD33;
+}
+.cucumber-react .cucumber-status--ambiguous {
+  color: #F4EBFD;
+}
+.cucumber-react .cucumber-status--failed {
+  color: #BB0000;
+}
+.cucumber-react .cucumber-status--unknown {
+  color: #B6BECB;
+}
+.cucumber-react h1, .cucumber-react h2, .cucumber-react h3 {
+  padding: 0;
+  margin: 0;
+}
+.cucumber-react a {
+  color: inherit;
+}
+.cucumber-react .gherkin-document-list {
+  font: 14px "Open Sans", sans-serif;
+  color: #161C24;
+  background: #fff;
+  overflow-x: hidden;
+}
+.cucumber-react .cucumber-title {
+  margin-top: 0.3em;
+  margin-bottom: 0;
+  display: inline-block;
+}
+.cucumber-react .cucumber-title__keyword {
+  font-weight: bold;
+}
+.cucumber-react .cucumber-title__text {
+  font-weight: normal;
+}
+.cucumber-react .cucumber-tags {
+  padding: 0;
+  margin-bottom: 0;
+}
+.cucumber-react .cucumber-tags .cucumber-tag {
+  display: inline;
+  list-style-type: none;
+  padding: 4px 8px 4px 8px;
+  margin-right: 6px;
+  background-color: #FFFFFF;
+  border-radius: 6px;
+}
+.cucumber-react .cucumber-feature__icon {
+  padding-top: 0.35em;
+  padding-right: 0.5em;
+}
+.cucumber-react .cucumber-description,
+.cucumber-react .cucumber-children {
+  margin-left: 1em;
+}
+.cucumber-react .cucumber-feature,
+.cucumber-react .cucumber-rule,
+.cucumber-react .cucumber-scenario,
+.cucumber-react .cucumber-background {
+  margin-bottom: 1em;
+}
+.cucumber-react .cucumber-steps {
+  list-style-type: none;
+  padding-left: 10px;
+}
+.cucumber-react .cucumber-steps .cucumber-step {
+  display: flex;
+}
+.cucumber-react .cucumber-steps .cucumber-step__status {
+  padding-top: 0.2em;
+  padding-right: 0.5em;
+}
+.cucumber-react .cucumber-steps .cucumber-step__content {
+  flex-grow: 1;
+  max-width: calc(100% - 1.5em);
+}
+.cucumber-react .cucumber-steps .cucumber-step__keyword {
+  font-weight: bold;
+}
+.cucumber-react .cucumber-steps .cucumber-step__text {
+  font-weight: normal;
+}
+.cucumber-react .cucumber-steps .cucumber-step__param {
+  font-weight: normal;
+  font-style: italic;
+}
+.cucumber-react .cucumber-table {
+  border-collapse: collapse;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.cucumber-react .cucumber-table__header-cell {
+  border: 1px solid #4B5662;
+  padding: 0.3em;
+}
+.cucumber-react .cucumber-table__cell {
+  border: 1px solid #4B5662;
+  padding: 0.3em;
+}
+.cucumber-react .cucumber-table__cell__status {
+  padding: 0.5em 3px 3px 3px;
+}
+.cucumber-react .cucumber-table__cell__step {
+  flex-grow: 1;
+}
+.cucumber-react .cucumber-code {
+  padding: 0.25em;
+  background-color: #ebebeb;
+}
+.cucumber-react .cucumber-error {
+  padding: 0.5em;
+  margin: 0;
+  overflow-x: auto;
+}
+.cucumber-react .cucumber-no-documents {
+  font: 14px "Open Sans", sans-serif;
+}
+.cucumber-react .cucumber-attachment__icon {
+  margin-right: 0.5em;
+}
+.cucumber-react .cucumber-attachment__image {
+  max-width: 100%;
+  margin-top: 1em;
+}
+.cucumber-react .cucumber-attachment__text {
+  background-color: #ebebeb;
+  padding: 0.5em;
+  overflow-x: auto;
+}
+.cucumber-react .cucumber-anchor {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 0.3em;
+}
+.cucumber-react .cucumber-anchor__link {
+  opacity: 0;
+  transition: all 0.35s ease-in-out;
+  position: absolute;
+  left: -20px;
+  display: flex;
+  align-items: center;
+}
+.cucumber-react .cucumber-anchor__icon {
+  margin-right: 0.5em;
+}
+.cucumber-react .cucumber-anchor:hover a {
+  opacity: 1;
+  width: max-content;
+  transition: all 0.35s ease-in-out;
+}
+.cucumber-react .cucumber-anchor > * {
+  height: 100%;
+  margin-top: 0px;
+}
+
+.cucumber-report-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font: 11px "Open Sans", sans-serif;
+  margin-bottom: 1em;
+}
+.cucumber-report-header > * {
+  padding: 1em;
+}
+.cucumber-report-header .cucumber-status-filter {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.cucumber-report-header .cucumber-status-filter table {
+  width: 100%;
+}
+.cucumber-report-header .cucumber-execution-data {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.cucumber-report-header .cucumber-search-bar {
+  border-right: 0;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-search {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-search input {
+  padding: 0.4em;
+  border-radius: 0;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-search button {
+  height: 2.2em;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
+}
+.cucumber-report-header .cucumber-search-bar p.help {
+  font-size: 80%;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-filter ul {
+  display: inline;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-filter ul li {
+  list-style-type: none;
+  display: inline-block;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-filter ul li input {
+  display: inline-block;
+  width: auto;
+  height: 0.6em;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-filter ul li label {
+  padding-right: 1em;
+}
+
+@media only screen and (min-width: 600px) {
+  .cucumber-report-header {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cucumber-report-header .cucumber-status-filter {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .cucumber-report-header .cucumber-search-bar {
+    grid-column: 1/-1;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .cucumber-report-header {
+    grid-template-columns: 1fr 1fr 2fr;
+  }
+  .cucumber-report-header .cucumber-status-filter {
+    border-bottom: 0;
+  }
+  .cucumber-report-header .cucumber-execution-data {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 0;
+  }
+  .cucumber-report-header .cucumber-search-bar {
+    grid-column: auto;
+  }
+}
+.accordion {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+.accordion__item + .accordion__item {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.accordion__button {
+    background-color: #f4f4f4;
+    color: #444;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+}
+
+.accordion__button:hover {
+    background-color: #ddd;
+}
+
+.accordion__button:before {
+    display: inline-block;
+    content: '';
+    height: 10px;
+    width: 10px;
+    margin-right: 12px;
+    border-bottom: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(-45deg);
+}
+
+.accordion__button[aria-expanded='true']::before,
+.accordion__button[aria-selected='true']::before {
+    transform: rotate(45deg);
+}
+
+.accordion__panel {
+    padding: 20px;
+    animation: fadein 0.35s ease-in;
+}
+
+
+	</style>
+</head>
+<body>
+<div id="content">
+</div>
+<script>
+window.CUCUMBER_MESSAGES = [
+{"meta":{"protocolVersion":"15.0.0","implementation":{"name":"cucumber-ruby","version":"6.1.0"},"runtime":{"name":"ruby","version":"2.7.3"},"os":{"name":"mingw32","version":"10.0.19042"},"cpu":{"name":"x64"}}},
+{"hook":{"id":"e95fad76-2b73-4ad6-b72a-dde5f7f420d0","sourceReference":{"uri":"capybara-3.35.3/lib/capybara/cucumber.rb","location":{"line":10}}}},
+{"hook":{"id":"2a8989e4-79b1-4c74-af6b-048e47929908","sourceReference":{"uri":"capybara-3.35.3/lib/capybara/cucumber.rb","location":{"line":14}}}},
+{"hook":{"id":"e02b10a7-dd40-4f2c-ba9b-aaba8bdce66a","tagExpression":"@javascript","sourceReference":{"uri":"capybara-3.35.3/lib/capybara/cucumber.rb","location":{"line":18}}}},
+{"hook":{"id":"dd0061aa-f3d9-48d0-826f-2d8f066bc8ab","sourceReference":{"uri":"capybara-3.35.3/lib/capybara/cucumber.rb","location":{"line":22}}}},
+{"hook":{"id":"5d1412d8-6f84-4c62-a81a-755f021b1e2c","sourceReference":{"uri":"features/support/hooks.rb","location":{"line":1}}}},
+{"hook":{"id":"b12e9ee4-f81e-4716-9ab3-eb5f7009881e","sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":3}}}},
+{"stepDefinition":{"id":"d2f96e35-81ce-4749-8d2f-e19ff366b63b","pattern":{"source":"que sou um usuario e acesso o site na home","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":9}}}},
+{"stepDefinition":{"id":"b7ef1473-4896-4f77-8980-5215a63d3b7b","pattern":{"source":"preencher o campo com o Honda","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":13}}}},
+{"stepDefinition":{"id":"93370cf6-243f-4fac-8d3f-5d5904a641e3","pattern":{"source":"clicar em VER OFERTAS","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":18}}}},
+{"stepDefinition":{"id":"f7767895-0d8a-4fdb-845d-d5716569869f","pattern":{"source":"devo ser redirecionado para a listagem de veiculos da marca Honda","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":22}}}},
+{"stepDefinition":{"id":"953ab338-5631-4351-b67e-a43d6b9dd959","pattern":{"source":"preencher o campo com o modelo city","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":26}}}},
+{"stepDefinition":{"id":"52541ab0-9e76-44ed-9e1a-1c7d5c5c1931","pattern":{"source":"devo ser redirecionado para a listagem de veiculos da Honda modelo City","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":31}}}},
+{"stepDefinition":{"id":"736d768b-076f-4699-ab2d-1e2986173a0f","pattern":{"source":"que sou um usuario e estou na busca refinada","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":35}}}},
+{"stepDefinition":{"id":"a3f74f6d-222f-4027-935a-ff27581659bf","pattern":{"source":"clico no fabricante Honda","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":39}}}},
+{"stepDefinition":{"id":"e87e47d6-8775-4bfa-9cf7-6661710046c6","pattern":{"source":"seleciono o modelo City","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":43}}}},
+{"stepDefinition":{"id":"287b210d-dcbd-44d5-b2c5-1b227ed0a554","pattern":{"source":"Versão HONDA CITY 1.5 EX 16V FLEX 4P AUTOMÁTICO","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":47}}}},
+{"stepDefinition":{"id":"da0a85a1-2a5f-4b83-abf4-cef1589800c7","pattern":{"source":"devo ser redirecionado para a listagem de veiculos da Honda, modelo City  e versao HONDA CITY 1.5 EX 16V FLEX 4P AUTOMÁTICO","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":51}}}},
+{"stepDefinition":{"id":"d4a797fd-8713-4652-b73e-e4dacf412572","pattern":{"source":"que sou um usuario e estou na pagina de um vendedor","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":55}}}},
+{"stepDefinition":{"id":"b013f8c7-8eca-447f-89fd-867611240455","pattern":{"source":"venho redirecionado para a campanha de um carro especifico","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":59}}}},
+{"stepDefinition":{"id":"e83287a6-33a2-4980-816e-cb3a25d256ea","pattern":{"source":"devo ser redirecionado para a listagem de veiculos do revendedor MAZOLA AUTOMOVEIS","type":"CUCUMBER_EXPRESSION"},"sourceReference":{"uri":"features/step_definitions/funcionalidades_board_steps.rb","location":{"line":63}}}},
+{"source":{"uri":"features/funcionalidades_board.feature","data":"# language: pt\nFuncionalidade: Busca de Carros\n  Como Usuario do site www.webmotors.com.br \n  Eu QUERO conseguir utilizar o filtro para refinar minha busca por Marca, Modelo e Versão a fim de conseguir buscar o veiculo desejado.\n\n  Cenário: Listar Filtro pela Marca Inicial na Home\n    Dado que sou um usuario e acesso o site na home\n    Quando preencher o campo com o Honda\n    E clicar em VER OFERTAS\n    Então devo ser redirecionado para a listagem de veiculos da marca Honda\n\n  Cenário: Listar Filtro pelo Modelo na Home\n    Dado que sou um usuario e acesso o site na home\n    Quando preencher o campo com o modelo city\n    E clicar em VER OFERTAS\n    Então devo ser redirecionado para a listagem de veiculos da Honda modelo City\n\n  Cenário: Listar carros por meio do filtro de fabricante\n    Dado que sou um usuario e estou na busca refinada\n    Quando clico no fabricante Honda\n    Então devo ser redirecionado para a listagem de veiculos da marca Honda\n\n  Cenário: Listar carros por meio do filtro de fabricante e Marca\n    Dado que sou um usuario e estou na busca refinada\n    Quando clico no fabricante Honda\n    E seleciono o modelo City\n    Então devo ser redirecionado para a listagem de veiculos da Honda modelo City\n\n  Cenário: Listar carros por meio do filtro de fabricante, Marca e Modelo\n    Dado que sou um usuario e estou na busca refinada\n    Quando clico no fabricante Honda\n    E seleciono o modelo City\n    E Versão HONDA CITY 1.5 EX 16V FLEX 4P AUTOMÁTICO\n    Então devo ser redirecionado para a listagem de veiculos da Honda, modelo City  e versao HONDA CITY 1.5 EX 16V FLEX 4P AUTOMÁTICO\n\n  #Neste teste optei por checar se existe apenas na base, tendo em vista que o elemento de busca ja foi automatizado posteriormente\n  Cenário: Listar todos os carros de um vendedor\n    Dado que sou um usuario e estou na pagina de um vendedor\n    Quando venho redirecionado para a campanha de um carro especifico\n    Então devo ser redirecionado para a listagem de veiculos do revendedor MAZOLA AUTOMOVEIS\n","mediaType":"text/x.cucumber.gherkin+plain"}},
+{"gherkinDocument":{"feature":{"location":{"line":2,"column":1},"language":"pt","keyword":"Funcionalidade","name":"Busca de Carros","description":"  Como Usuario do site www.webmotors.com.br \n  Eu QUERO conseguir utilizar o filtro para refinar minha busca por Marca, Modelo e Versão a fim de conseguir buscar o veiculo desejado.","children":[{"scenario":{"id":"07fb8609-b747-4bc0-94cf-7a939e8c7390","location":{"line":6,"column":3},"keyword":"Cenário","name":"Listar Filtro pela Marca Inicial na Home","steps":[{"location":{"line":7,"column":5},"keyword":"Dado ","text":"que sou um usuario e acesso o site na home","id":"d6a0239b-84ef-44c8-8aae-e7fd7647f5ec"},{"location":{"line":8,"column":5},"keyword":"Quando ","text":"preencher o campo com o Honda","id":"df9f989e-68c7-4d0c-8c63-57efaee7b7d0"},{"location":{"line":9,"column":5},"keyword":"E ","text":"clicar em VER OFERTAS","id":"4eba446c-0112-4deb-9535-bd7fa2e4e995"},{"location":{"line":10,"column":5},"keyword":"Então ","text":"devo ser redirecionado para a listagem de veiculos da marca Honda","id":"b4de4ea5-b0db-4fa0-9c28-07226282e507"}]}},{"scenario":{"id":"9f8d192c-9384-47ee-9201-6c09b10b02a3","location":{"line":12,"column":3},"keyword":"Cenário","name":"Listar Filtro pelo Modelo na Home","steps":[{"location":{"line":13,"column":5},"keyword":"Dado ","text":"que sou um usuario e acesso o site na home","id":"f0123381-f8e6-4fea-b330-d3e85d108b87"},{"location":{"line":14,"column":5},"keyword":"Quando ","text":"preencher o campo com o modelo city","id":"664391f1-1a86-4ee0-b926-4cfeb9de3c02"},{"location":{"line":15,"column":5},"keyword":"E ","text":"clicar em VER OFERTAS","id":"3dcfa897-a74f-4c81-89d2-927624caa41b"},{"location":{"line":16,"column":5},"keyword":"Então ","text":"devo ser redirecionado para a listagem de veiculos da Honda modelo City","id":"be3fc7fd-fdbf-4c3f-bc2b-5a5a77032b9a"}]}},{"scenario":{"id":"b6e6dc13-fe2b-46ed-b780-0e07a6d676b6","location":{"line":18,"column":3},"keyword":"Cenário","name":"Listar carros por meio do filtro de fabricante","steps":[{"location":{"line":19,"column":5},"keyword":"Dado ","text":"que sou um usuario e estou na busca refinada","id":"3a1e8bfb-b826-4d0f-a19e-1f477f4ced57"},{"location":{"line":20,"column":5},"keyword":"Quando ","text":"clico no fabricante Honda","id":"c1bf9b35-5f60-4fad-a243-8c28843b04a6"},{"location":{"line":21,"column":5},"keyword":"Então ","text":"devo ser redirecionado para a listagem de veiculos da marca Honda","id":"b163a5f3-9a25-4b15-b82c-d8c11cc1f600"}]}},{"scenario":{"id":"433e07f9-1eef-4afb-b6f3-ef7d27521bc0","location":{"line":23,"column":3},"keyword":"Cenário","name":"Listar carros por meio do filtro de fabricante e Marca","steps":[{"location":{"line":24,"column":5},"keyword":"Dado ","text":"que sou um usuario e estou na busca refinada","id":"1f6945cc-c7a4-47d2-8703-5082de77deb5"},{"location":{"line":25,"column":5},"keyword":"Quando ","text":"clico no fabricante Honda","id":"7653935a-7c3d-414a-9739-f8609580cb0e"},{"location":{"line":26,"column":5},"keyword":"E ","text":"seleciono o modelo City","id":"f9c23f27-e2f5-4bb3-b551-03b9b46c624b"},{"location":{"line":27,"column":5},"keyword":"Então ","text":"devo ser redirecionado para a listagem de veiculos da Honda modelo City","id":"b0adcc98-ad94-4547-a2d3-dfa895a1ac39"}]}},{"scenario":{"id":"add9a5f9-2e57-4e83-89b3-8c242c257c56","location":{"line":29,"column":3},"keyword":"Cenário","name":"Listar carros por meio do filtro de fabricante, Marca e Modelo","steps":[{"location":{"line":30,"column":5},"keyword":"Dado ","text":"que sou um usuario e estou na busca refinada","id":"9f961bcb-8612-4a3f-862d-b3938e0a8e80"},{"location":{"line":31,"column":5},"keyword":"Quando ","text":"clico no fabricante Honda","id":"fd269f00-2720-4a54-95f3-b08c56770559"},{"location":{"line":32,"column":5},"keyword":"E ","text":"seleciono o modelo City","id":"73437e3e-6935-4ece-a180-f4a8d2cf3280"},{"location":{"line":33,"column":5},"keyword":"E ","text":"Versão HONDA CITY 1.5 EX 16V FLEX 4P AUTOMÁTICO","id":"3c2a85c2-f2fc-4c24-b12d-e0af40912b4d"},{"location":{"line":34,"column":5},"keyword":"Então ","text":"devo ser redirecionado para a listagem de veiculos da Honda, modelo City  e versao HONDA CITY 1.5 EX 16V FLEX 4P AUTOMÁTICO","id":"4c2b3de5-1b6d-48d2-85ad-aeb949b56aae"}]}},{"scenario":{"id":"c9c6ba6b-f219-4c96-87c3-195d3ebf6257","location":{"line":37,"column":3},"keyword":"Cenário","name":"Listar todos os carros de um vendedor","steps":[{"location":{"line":38,"column":5},"keyword":"Dado ","text":"que sou um usuario e estou na pagina de um vendedor","id":"f7df9996-b9a7-429d-8494-fe8faef675bf"},{"location":{"line":39,"column":5},"keyword":"Quando ","text":"venho redirecionado para a campanha de um carro especifico","id":"95558a9d-9923-42d8-b90b-a82143644079"},{"location":{"line":40,"column":5},"keyword":"Então ","text":"devo ser redirecionado para a listagem de veiculos do revendedor MAZOLA AUTOMOVEIS","id":"b8f4d8c0-3d1e-4aa6-88b5-5718fd7427e0"}]}}]},"comments":[{"location":{"line":36,"column":1},"text":"  #Neste teste optei por checar se existe apenas na base, tendo em vista que o elemento de busca ja foi automatizado posteriormente"}],"uri":"features/funcionalidades_board.feature"}},
+{"pickle":{"uri":"features/funcionalidades_board.feature","id":"d8ee3577-93a2-44f2-98cc-24961ef026fd","name":"Listar Filtro pela Marca Inicial na Home","language":"pt","astNodeIds":["07fb8609-b747-4bc0-94cf-7a939e8c7390"],"steps":[{"id":"059b7837-0766-4676-8b4d-9868b5c273a1","astNodeIds":["d6a0239b-84ef-44c8-8aae-e7fd7647f5ec"],"text":"que sou um usuario e acesso o site na home"},{"id":"06b46ea2-fd49-4547-9315-8576310e1421","astNodeIds":["df9f989e-68c7-4d0c-8c63-57efaee7b7d0"],"text":"preencher o campo com o Honda"},{"id":"c72348f4-f05c-4826-96fa-fcb14e318d0f","astNodeIds":["4eba446c-0112-4deb-9535-bd7fa2e4e995"],"text":"clicar em VER OFERTAS"},{"id":"f99f5429-8c59-476d-a356-e210175ac1c5","astNodeIds":["b4de4ea5-b0db-4fa0-9c28-07226282e507"],"text":"devo ser redirecionado para a listagem de veiculos da marca Honda"}]}},
+{"pickle":{"uri":"features/funcionalidades_board.feature","id":"3e4e9d92-67d2-44ed-a085-16637fa5a58d","name":"Listar Filtro pelo Modelo na Home","language":"pt","astNodeIds":["9f8d192c-9384-47ee-9201-6c09b10b02a3"],"steps":[{"id":"148dae28-7a7c-4d32-86e0-5d9dcaabd97c","astNodeIds":["f0123381-f8e6-4fea-b330-d3e85d108b87"],"text":"que sou um usuario e acesso o site na home"},{"id":"4b7974d3-3894-4bd3-aa94-a91f5062bf5b","astNodeIds":["664391f1-1a86-4ee0-b926-4cfeb9de3c02"],"text":"preencher o campo com o modelo city"},{"id":"bdd8196a-a83a-4c34-87c5-08fdbf15885d","astNodeIds":["3dcfa897-a74f-4c81-89d2-927624caa41b"],"text":"clicar em VER OFERTAS"},{"id":"823c5218-1480-4cc2-9993-32a6e41ad7d6","astNodeIds":["be3fc7fd-fdbf-4c3f-bc2b-5a5a77032b9a"],"text":"devo ser redirecionado para a listagem de veiculos da Honda modelo City"}]}},
+{"pickle":{"uri":"features/funcionalidades_board.feature","id":"d3b2de83-bff7-474f-937b-6f683dbaf2b9","name":"Listar carros por meio do filtro de fabricante","language":"pt","astNodeIds":["b6e6dc13-fe2b-46ed-b780-0e07a6d676b6"],"steps":[{"id":"8af4d1f2-37d9-4671-8000-7dc96eb7e559","astNodeIds":["3a1e8bfb-b826-4d0f-a19e-1f477f4ced57"],"text":"que sou um usuario e estou na busca refinada"},{"id":"5364b4c8-8c23-4911-9d27-df5bf404c40f","astNodeIds":["c1bf9b35-5f60-4fad-a243-8c28843b04a6"],"text":"clico no fabricante Honda"},{"id":"bf0f74a5-85c4-4fdb-8d24-86cd2328f6e9","astNodeIds":["b163a5f3-9a25-4b15-b82c-d8c11cc1f600"],"text":"devo ser redirecionado para a listagem de veiculos da marca Honda"}]}},
+{"pickle":{"uri":"features/funcionalidades_board.feature","id":"beaf6b17-b431-4cf2-8391-35b4e01d07a6","name":"Listar carros por meio do filtro de fabricante e Marca","language":"pt","astNodeIds":["433e07f9-1eef-4afb-b6f3-ef7d27521bc0"],"steps":[{"id":"8376978d-583a-451e-80c7-3e915847a65e","astNodeIds":["1f6945cc-c7a4-47d2-8703-5082de77deb5"],"text":"que sou um usuario e estou na busca refinada"},{"id":"36a7cf62-57bd-45f2-a609-b392cf0521ca","astNodeIds":["7653935a-7c3d-414a-9739-f8609580cb0e"],"text":"clico no fabricante Honda"},{"id":"2c24fbb1-5be8-4276-98d1-265ca18b6587","astNodeIds":["f9c23f27-e2f5-4bb3-b551-03b9b46c624b"],"text":"seleciono o modelo City"},{"id":"4954efc2-d4ba-40fd-abb3-874121c0f99b","astNodeIds":["b0adcc98-ad94-4547-a2d3-dfa895a1ac39"],"text":"devo ser redirecionado para a listagem de veiculos da Honda modelo City"}]}},
+{"pickle":{"uri":"features/funcionalidades_board.feature","id":"e6ad33cd-c023-46a7-862d-2829c52b6273","name":"Listar carros por meio do filtro de fabricante, Marca e Modelo","language":"pt","astNodeIds":["add9a5f9-2e57-4e83-89b3-8c242c257c56"],"steps":[{"id":"87f3978d-6fa4-4957-8c52-75144247f9ac","astNodeIds":["9f961bcb-8612-4a3f-862d-b3938e0a8e80"],"text":"que sou um usuario e estou na busca refinada"},{"id":"e93f4a5d-21e0-486a-bc4d-ca28672879cc","astNodeIds":["fd269f00-2720-4a54-95f3-b08c56770559"],"text":"clico no fabricante Honda"},{"id":"ce935903-666e-4540-8d8d-ae145d9f2c71","astNodeIds":["73437e3e-6935-4ece-a180-f4a8d2cf3280"],"text":"seleciono o modelo City"},{"id":"e1bf9d0d-58d0-4786-8875-4075899bd6fc","astNodeIds":["3c2a85c2-f2fc-4c24-b12d-e0af40912b4d"],"text":"Versão HONDA CITY 1.5 EX 16V FLEX 4P AUTOMÁTICO"},{"id":"253ab89c-0f76-4366-b9b1-ea06cf0327d7","astNodeIds":["4c2b3de5-1b6d-48d2-85ad-aeb949b56aae"],"text":"devo ser redirecionado para a listagem de veiculos da Honda, modelo City  e versao HONDA CITY 1.5 EX 16V FLEX 4P AUTOMÁTICO"}]}},
+{"pickle":{"uri":"features/funcionalidades_board.feature","id":"6aa61353-cc38-41ca-8218-8d23a5fc8aba","name":"Listar todos os carros de um vendedor","language":"pt","astNodeIds":["c9c6ba6b-f219-4c96-87c3-195d3ebf6257"],"steps":[{"id":"1614b098-8b1e-4f96-a18f-d7d74357d040","astNodeIds":["f7df9996-b9a7-429d-8494-fe8faef675bf"],"text":"que sou um usuario e estou na pagina de um vendedor"},{"id":"4cb5685d-0a03-4081-937f-ad2345358c01","astNodeIds":["95558a9d-9923-42d8-b90b-a82143644079"],"text":"venho redirecionado para a campanha de um carro especifico"},{"id":"b7283918-fe13-4f5f-990f-96e93e8be5a8","astNodeIds":["b8f4d8c0-3d1e-4aa6-88b5-5718fd7427e0"],"text":"devo ser redirecionado para a listagem de veiculos do revendedor MAZOLA AUTOMOVEIS"}]}},
+{"testCase":{"id":"002a61af-dc2a-4ad4-af58-91c6a33780ce","pickleId":"d8ee3577-93a2-44f2-98cc-24961ef026fd","testSteps":[{"id":"80b66cf0-2b06-4aa4-8af8-1f4d97a68363","hookId":"2a8989e4-79b1-4c74-af6b-048e47929908"},{"id":"dcbe25e0-b634-45ef-96cd-54aedddfcb60","hookId":"dd0061aa-f3d9-48d0-826f-2d8f066bc8ab"},{"id":"2d617811-622f-44bc-a437-4274a6f95cc6","hookId":"b12e9ee4-f81e-4716-9ab3-eb5f7009881e"},{"id":"bcd62ed5-3dde-45d8-bf37-16f6b0a8824a","pickleStepId":"059b7837-0766-4676-8b4d-9868b5c273a1","stepDefinitionIds":["d2f96e35-81ce-4749-8d2f-e19ff366b63b"],"stepMatchArgumentsLists":[{}]},{"id":"3c595feb-7a5f-4a2c-b37b-3074141c2126","pickleStepId":"06b46ea2-fd49-4547-9315-8576310e1421","stepDefinitionIds":["b7ef1473-4896-4f77-8980-5215a63d3b7b"],"stepMatchArgumentsLists":[{}]},{"id":"b4e6b346-012e-4950-a859-2048eabc11d6","pickleStepId":"c72348f4-f05c-4826-96fa-fcb14e318d0f","stepDefinitionIds":["93370cf6-243f-4fac-8d3f-5d5904a641e3"],"stepMatchArgumentsLists":[{}]},{"id":"3444eaad-0a9f-4643-9d74-0175353cf747","pickleStepId":"f99f5429-8c59-476d-a356-e210175ac1c5","stepDefinitionIds":["f7767895-0d8a-4fdb-845d-d5716569869f"],"stepMatchArgumentsLists":[{}]},{"id":"419534b6-845c-4dca-99b5-8e4d64ca06c6","hookId":"5d1412d8-6f84-4c62-a81a-755f021b1e2c"},{"id":"6da1bf9c-e8be-4c49-b54f-cd2f84668156","hookId":"e95fad76-2b73-4ad6-b72a-dde5f7f420d0"}]}},
+{"testCase":{"id":"c08e6da4-4227-4a38-ab17-89f2ff50b3c8","pickleId":"3e4e9d92-67d2-44ed-a085-16637fa5a58d","testSteps":[{"id":"9813080e-ba22-4d04-b8bc-6e01054c0709","hookId":"2a8989e4-79b1-4c74-af6b-048e47929908"},{"id":"19316137-059e-4a26-96da-37c78388e1c1","hookId":"dd0061aa-f3d9-48d0-826f-2d8f066bc8ab"},{"id":"a1aebded-b6c1-416e-9aea-247c46629955","hookId":"b12e9ee4-f81e-4716-9ab3-eb5f7009881e"},{"id":"af7f9361-e478-408b-90c4-3be5a6e5ea09","pickleStepId":"148dae28-7a7c-4d32-86e0-5d9dcaabd97c","stepDefinitionIds":["d2f96e35-81ce-4749-8d2f-e19ff366b63b"],"stepMatchArgumentsLists":[{}]},{"id":"95901b15-c125-44eb-a788-dacfe7ef8b02","pickleStepId":"4b7974d3-3894-4bd3-aa94-a91f5062bf5b","stepDefinitionIds":["953ab338-5631-4351-b67e-a43d6b9dd959"],"stepMatchArgumentsLists":[{}]},{"id":"394414cf-531d-43ec-ae06-0960af10a117","pickleStepId":"bdd8196a-a83a-4c34-87c5-08fdbf15885d","stepDefinitionIds":["93370cf6-243f-4fac-8d3f-5d5904a641e3"],"stepMatchArgumentsLists":[{}]},{"id":"9d4403fe-416c-43b9-8fb7-119657b9012f","pickleStepId":"823c5218-1480-4cc2-9993-32a6e41ad7d6","stepDefinitionIds":["52541ab0-9e76-44ed-9e1a-1c7d5c5c1931"],"stepMatchArgumentsLists":[{}]},{"id":"bb87ecb8-8c8f-45bc-9c52-1f9beaeb043a","hookId":"5d1412d8-6f84-4c62-a81a-755f021b1e2c"},{"id":"dd84e208-9f6b-440f-a694-426805a8a56e","hookId":"e95fad76-2b73-4ad6-b72a-dde5f7f420d0"}]}},
+{"testCase":{"id":"20a29f0c-d972-4c70-9524-9a29bc6b9916","pickleId":"d3b2de83-bff7-474f-937b-6f683dbaf2b9","testSteps":[{"id":"128aa1a5-0fa6-46bf-9efc-8773dd83bab3","hookId":"2a8989e4-79b1-4c74-af6b-048e47929908"},{"id":"f2268ef2-a198-4af1-851f-5ab5da377bfc","hookId":"dd0061aa-f3d9-48d0-826f-2d8f066bc8ab"},{"id":"054beabe-3554-4972-88a4-3b60d3132565","hookId":"b12e9ee4-f81e-4716-9ab3-eb5f7009881e"},{"id":"53a743a6-d5ba-452a-abec-89b5097bd5a6","pickleStepId":"8af4d1f2-37d9-4671-8000-7dc96eb7e559","stepDefinitionIds":["736d768b-076f-4699-ab2d-1e2986173a0f"],"stepMatchArgumentsLists":[{}]},{"id":"139f48e6-9dc8-4ea5-b5bc-a129eeab2cd7","pickleStepId":"5364b4c8-8c23-4911-9d27-df5bf404c40f","stepDefinitionIds":["a3f74f6d-222f-4027-935a-ff27581659bf"],"stepMatchArgumentsLists":[{}]},{"id":"4afe1440-22df-46ed-b593-5053d20ffe4d","pickleStepId":"bf0f74a5-85c4-4fdb-8d24-86cd2328f6e9","stepDefinitionIds":["f7767895-0d8a-4fdb-845d-d5716569869f"],"stepMatchArgumentsLists":[{}]},{"id":"3171ef5f-39d0-4934-acee-013d63b6136b","hookId":"5d1412d8-6f84-4c62-a81a-755f021b1e2c"},{"id":"41f5c5a2-7fdd-4f3a-9b70-5e0c4de0be9c","hookId":"e95fad76-2b73-4ad6-b72a-dde5f7f420d0"}]}},
+{"testCase":{"id":"4970249a-a96c-49b7-95cd-b1526932633a","pickleId":"beaf6b17-b431-4cf2-8391-35b4e01d07a6","testSteps":[{"id":"186bbbd8-ebf3-4a16-a574-53c90bf539dd","hookId":"2a8989e4-79b1-4c74-af6b-048e47929908"},{"id":"a827c573-632b-41b2-a85e-900038f4da35","hookId":"dd0061aa-f3d9-48d0-826f-2d8f066bc8ab"},{"id":"6f4d2e40-f2d1-40c9-b845-f420776dd09a","hookId":"b12e9ee4-f81e-4716-9ab3-eb5f7009881e"},{"id":"d3198b8a-364b-4da0-a0e0-6282e4a81722","pickleStepId":"8376978d-583a-451e-80c7-3e915847a65e","stepDefinitionIds":["736d768b-076f-4699-ab2d-1e2986173a0f"],"stepMatchArgumentsLists":[{}]},{"id":"474118cc-e237-4285-95ca-4270c7b90757","pickleStepId":"36a7cf62-57bd-45f2-a609-b392cf0521ca","stepDefinitionIds":["a3f74f6d-222f-4027-935a-ff27581659bf"],"stepMatchArgumentsLists":[{}]},{"id":"11767f44-0585-4a03-a261-7b3d3f227ba7","pickleStepId":"2c24fbb1-5be8-4276-98d1-265ca18b6587","stepDefinitionIds":["e87e47d6-8775-4bfa-9cf7-6661710046c6"],"stepMatchArgumentsLists":[{}]},{"id":"1c136d41-5471-473b-89fc-0d7a9c36f609","pickleStepId":"4954efc2-d4ba-40fd-abb3-874121c0f99b","stepDefinitionIds":["52541ab0-9e76-44ed-9e1a-1c7d5c5c1931"],"stepMatchArgumentsLists":[{}]},{"id":"7199f551-2801-4d38-8fd7-0e35cb0eaad7","hookId":"5d1412d8-6f84-4c62-a81a-755f021b1e2c"},{"id":"5288a614-c6f2-48fc-8ac6-a876d96ca633","hookId":"e95fad76-2b73-4ad6-b72a-dde5f7f420d0"}]}},
+{"testCase":{"id":"056df7f3-ab21-4d09-887e-77f251113363","pickleId":"e6ad33cd-c023-46a7-862d-2829c52b6273","testSteps":[{"id":"87b3185d-59c5-429a-bfb8-066d0db3cf0a","hookId":"2a8989e4-79b1-4c74-af6b-048e47929908"},{"id":"70fa2202-96d2-41a5-8c36-b94759a92559","hookId":"dd0061aa-f3d9-48d0-826f-2d8f066bc8ab"},{"id":"e6e68056-7527-4354-82ae-22ff070a6ffb","hookId":"b12e9ee4-f81e-4716-9ab3-eb5f7009881e"},{"id":"28f85bc5-14b5-49af-9449-0e5d43a70c6e","pickleStepId":"87f3978d-6fa4-4957-8c52-75144247f9ac","stepDefinitionIds":["736d768b-076f-4699-ab2d-1e2986173a0f"],"stepMatchArgumentsLists":[{}]},{"id":"642c2e12-9be8-4090-bf0a-6eb419c662e3","pickleStepId":"e93f4a5d-21e0-486a-bc4d-ca28672879cc","stepDefinitionIds":["a3f74f6d-222f-4027-935a-ff27581659bf"],"stepMatchArgumentsLists":[{}]},{"id":"7925b7ff-5ce1-47fa-895e-eb5cf4505c3b","pickleStepId":"ce935903-666e-4540-8d8d-ae145d9f2c71","stepDefinitionIds":["e87e47d6-8775-4bfa-9cf7-6661710046c6"],"stepMatchArgumentsLists":[{}]},{"id":"22b23c94-8985-40cc-9e17-88d12eb5bb17","pickleStepId":"e1bf9d0d-58d0-4786-8875-4075899bd6fc","stepDefinitionIds":["287b210d-dcbd-44d5-b2c5-1b227ed0a554"],"stepMatchArgumentsLists":[{}]},{"id":"ecd46bf2-d268-494b-b482-345894d0d769","pickleStepId":"253ab89c-0f76-4366-b9b1-ea06cf0327d7","stepDefinitionIds":["da0a85a1-2a5f-4b83-abf4-cef1589800c7"],"stepMatchArgumentsLists":[{}]},{"id":"34bee3ce-ac08-4b3f-b582-d542af06b9ba","hookId":"5d1412d8-6f84-4c62-a81a-755f021b1e2c"},{"id":"aab3f900-cc0c-4826-9f23-22bbe09b8c7e","hookId":"e95fad76-2b73-4ad6-b72a-dde5f7f420d0"}]}},
+{"testCase":{"id":"e1240b78-bb45-485d-9c6c-7ccc998ab240","pickleId":"6aa61353-cc38-41ca-8218-8d23a5fc8aba","testSteps":[{"id":"4f54c396-aeae-42a5-bf4c-186cfade5d95","hookId":"2a8989e4-79b1-4c74-af6b-048e47929908"},{"id":"1c9b0379-aa37-4cc1-9cd2-543218592e61","hookId":"dd0061aa-f3d9-48d0-826f-2d8f066bc8ab"},{"id":"4b588ec3-13d7-40f7-8675-02978c3cdf10","hookId":"b12e9ee4-f81e-4716-9ab3-eb5f7009881e"},{"id":"6f8d8207-84de-4565-9d8e-135f2f2b8dfd","pickleStepId":"1614b098-8b1e-4f96-a18f-d7d74357d040","stepDefinitionIds":["d4a797fd-8713-4652-b73e-e4dacf412572"],"stepMatchArgumentsLists":[{}]},{"id":"6e35041b-1c22-4a11-ae53-611e56c98e7f","pickleStepId":"4cb5685d-0a03-4081-937f-ad2345358c01","stepDefinitionIds":["b013f8c7-8eca-447f-89fd-867611240455"],"stepMatchArgumentsLists":[{}]},{"id":"c2c9dcdf-1549-473a-966d-95a648059cc4","pickleStepId":"b7283918-fe13-4f5f-990f-96e93e8be5a8","stepDefinitionIds":["e83287a6-33a2-4980-816e-cb3a25d256ea"],"stepMatchArgumentsLists":[{}]},{"id":"819601a2-622e-47e3-96d0-1d82024d4322","hookId":"5d1412d8-6f84-4c62-a81a-755f021b1e2c"},{"id":"eea6ff33-a392-43ab-bf58-64362c99b122","hookId":"e95fad76-2b73-4ad6-b72a-dde5f7f420d0"}]}},
+{"testRunStarted":{"timestamp":{"seconds":"1632403521","nanos":525775500}}},
+{"testCaseStarted":{"id":"67621775-4c6c-4219-8aec-9c473b14b2e4","testCaseId":"002a61af-dc2a-4ad4-af58-91c6a33780ce","timestamp":{"seconds":"1632403521","nanos":527652600},"attempt":1}},
+{"testStepStarted":{"testStepId":"80b66cf0-2b06-4aa4-8af8-1f4d97a68363","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","timestamp":{"seconds":"1632403521","nanos":593958800}}},
+{"testStepFinished":{"testStepId":"80b66cf0-2b06-4aa4-8af8-1f4d97a68363","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","testStepResult":{"status":"PASSED","duration":{"nanos":34500}},"timestamp":{"seconds":"1632403521","nanos":594389900}}},
+{"testStepStarted":{"testStepId":"dcbe25e0-b634-45ef-96cd-54aedddfcb60","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","timestamp":{"seconds":"1632403521","nanos":594577000}}},
+{"testStepFinished":{"testStepId":"dcbe25e0-b634-45ef-96cd-54aedddfcb60","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","testStepResult":{"status":"PASSED","duration":{"nanos":11500}},"timestamp":{"seconds":"1632403521","nanos":594703400}}},
+{"testStepStarted":{"testStepId":"2d617811-622f-44bc-a437-4274a6f95cc6","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","timestamp":{"seconds":"1632403521","nanos":594843400}}},
+{"testStepFinished":{"testStepId":"2d617811-622f-44bc-a437-4274a6f95cc6","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","testStepResult":{"status":"PASSED","duration":{"seconds":"1","nanos":600637800}},"timestamp":{"seconds":"1632403523","nanos":195721700}}},
+{"testStepStarted":{"testStepId":"bcd62ed5-3dde-45d8-bf37-16f6b0a8824a","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","timestamp":{"seconds":"1632403523","nanos":196206500}}},
+{"testStepFinished":{"testStepId":"bcd62ed5-3dde-45d8-bf37-16f6b0a8824a","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","testStepResult":{"status":"PASSED","duration":{"seconds":"12","nanos":191597299}},"timestamp":{"seconds":"1632403535","nanos":388753500}}},
+{"testStepStarted":{"testStepId":"3c595feb-7a5f-4a2c-b37b-3074141c2126","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","timestamp":{"seconds":"1632403535","nanos":389172500}}},
+{"testStepFinished":{"testStepId":"3c595feb-7a5f-4a2c-b37b-3074141c2126","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","testStepResult":{"status":"PASSED","duration":{"nanos":172983200}},"timestamp":{"seconds":"1632403535","nanos":562870400}}},
+{"testStepStarted":{"testStepId":"b4e6b346-012e-4950-a859-2048eabc11d6","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","timestamp":{"seconds":"1632403535","nanos":563285800}}},
+{"testStepFinished":{"testStepId":"b4e6b346-012e-4950-a859-2048eabc11d6","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","testStepResult":{"status":"PASSED","duration":{"seconds":"3","nanos":800623100}},"timestamp":{"seconds":"1632403539","nanos":364823700}}},
+{"testStepStarted":{"testStepId":"3444eaad-0a9f-4643-9d74-0175353cf747","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","timestamp":{"seconds":"1632403539","nanos":365296200}}},
+{"testStepFinished":{"testStepId":"3444eaad-0a9f-4643-9d74-0175353cf747","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","testStepResult":{"status":"PASSED","duration":{"nanos":67230500}},"timestamp":{"seconds":"1632403539","nanos":433476800}}},
+{"testStepStarted":{"testStepId":"419534b6-845c-4dca-99b5-8e4d64ca06c6","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","timestamp":{"seconds":"1632403539","nanos":433902700}}},
+{"attachment":{"testStepId":"419534b6-845c-4dca-99b5-8e4d64ca06c6","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","mediaType":"log/screenshots/listarfiltropelamarcainicialnahome.png","contentEncoding":"BASE64","body":"aW1hZ2U="}},
+{"testStepFinished":{"testStepId":"419534b6-845c-4dca-99b5-8e4d64ca06c6","testCaseStartedId":"67621775-4c6c-4219-8aec-9c473b14b2e4","testStepResult":{"status":"PASSED","duration":{"nanos":162491300}},"timestamp":{"seconds":"1632403539","nanos":596661200}}}
