@@ -1,4 +1,4 @@
-# WebMotors
+# WebMotors👋
 ### Prova Recrutamento Webmotors
 
 Esta prova foi desenvolvida utilizando o BDD para montarmos os cenarios de testes. Abaixo listamos os cenarios considerados para o teste:
